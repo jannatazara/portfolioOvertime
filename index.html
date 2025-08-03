@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overtime Management System - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            padding: 50px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .tech-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            transform: translateY(-2px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .screenshot-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.02);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .screenshot-caption {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .screenshot-caption h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 50px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            margin: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 30px 20px;
+            }
+            
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔥 OVERTIME MANAGEMENT SYSTEM</h1>
+            <p class="subtitle">Sistem Manajemen Lembur Modern untuk PT. Sertco Quality</p>
+        </header>
+
+        <div class="content">
+            <!-- Project Overview -->
+            <section class="section">
+                <h2>📋 Project Overview</h2>
+                <p style="font-size: 1.2rem; line-height: 1.8; color: #555;">
+                    Web aplikasi untuk mengatur data lembur karyawan di PT. Sertco Quality. 
+                    Fitur utama: input data karyawan, pengajuan lembur, persetujuan atasan, 
+                    dan laporan lengkap dengan filter cetak.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-badge">HTML5</span>
+                    <span class="tech-badge">CSS3</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">PHP</span>
+                    <span class="tech-badge">MySQL</span>
+                    <span class="tech-badge">Bootstrap</span>
+                </div>
+            </section>
+
+            <!-- Key Features -->
+            <section class="section">
+                <h2>⚡ Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🔐 Sistem Autentikasi</h4>
+                        <p>Interface login yang clean dan professional dengan sistem keamanan berbasis role-based access control.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>👥 Manajemen Karyawan</h4>
+                        <p>Database karyawan lengkap dengan form input yang user-friendly dan validasi data real-time.</p>
+                    </div>
+                   
+                    <div class="feature-card">
+                        <h4>⏰ Tracking Lembur</h4>
+                        <p>Sistem pencatatan lembur detail dengan ID unik, waktu kerja, dan deskripsi aktivitas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📋 Workflow Approval</h4>
+                        <p>Sistem persetujuan bertingkat: Supervisor → Site Manager dengan tracking status real-time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 Comprehensive Reports</h4>
+                        <p>Laporan lengkap dengan filtering berdasarkan periode, badge, dan berbagai parameter lainnya.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screenshots -->
+            <section class="section">
+                <h2>📸 System Screenshots</h2>
+                <div class="screenshots-grid">
+                    <div class="screenshot-item">
+                        <img src="images/login.png" alt="Login Interface" onerror="this.src='https://via.placeholder.com/400x250/667eea/white?text=Login+Interface'">
+                        <div class="screenshot-caption">
+                            <h4>Login Interface</h4>
+                            <p>Halaman login untuk masuk sistem</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/dashboard.png" alt="Admin Dashboard" onerror="this.src='https://via.placeholder.com/400x250/764ba2/white?text=Admin+Dashboard'">
+                        <div class="screenshot-caption">
+                            <h4>Admin Dashboard</h4>
+                            <p>Tampilan Dashboard admin</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/input-karyawan.png" alt="Employee Management" onerror="this.src='https://via.placeholder.com/400x250/667eea/white?text=Employee+Data'">
+                        <div class="screenshot-caption">
+                            <h4>Employee Management</h4>
+                            <p>Form input data karyawan</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/data-jabatan.png" alt="Position Management" onerror="this.src='https://via.placeholder.com/400x250/764ba2/white?text=Position+Data'">
+                        <div class="screenshot-caption">
+                            <h4>Position Management</h4>
+                            <p>Tampilan data-data jabatan</p>
+                        </div>
+                    </div>
+		    <div class="screenshot-item">
+                        <img src="images/dashboard2.png" alt="Admin Dashboard" onerror="this.src='https://via.placeholder.com/400x250/764ba2/white?text=Admin+Dashboard'">
+                        <div class="screenshot-caption">
+                            <h4>Karyawan Dashboard</h4>
+                            <p>Tampilan dashboard karyawan</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/pengajuan-overtime.png" alt="Overtime Tracking" onerror="this.src='https://via.placeholder.com/400x250/667eea/white?text=Overtime+Data'">
+                        <div class="screenshot-caption">
+                            <h4>Overtime Management</h4>
+                            <p>Tampilan form input pengajuan lembur</p>
+                        </div>
+                    </div>
+		    <div class="screenshot-item">
+                        <img src="images/data-overtime.png" alt="Position Management" onerror="this.src='https://via.placeholder.com/400x250/764ba2/white?text=Position+Data'">
+                        <div class="screenshot-caption">
+                            <h4>Overtime Management</h4>
+                            <p>Tampilan data-data overtime</p>
+                        </div>
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/approval.png" alt="Approval System" onerror="this.src='https://via.placeholder.com/400x250/764ba2/white?text=Approval+System'">
+                        <div class="screenshot-caption">
+                            <h4>Approval Workflow</h4>
+                            <p>Tampilan input persetujuan status overtime</p>
+                        </div>
+                    </div>
+		    <div class="screenshot-item">
+                        <img src="images/report.png" alt="Approval System" onerror="this.src='https://via.placeholder.com/400x250/764ba2/white?text=Approval+System'">
+                        <div class="screenshot-caption">
+                            <h4>Report</h4>
+                            <p>Tampilan report dengan filter cetak</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Technical Implementation -->
+            <section class="section">
+                <h2>⚙️ Technical Implementation</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🎨 Frontend</h4>
+                        <ul style="margin-top: 15px; line-height: 1.8;">
+                            <li>HTML untuk struktur halaman</li>
+                            <li>CSS untuk desain dan tampilan</li>
+                            <li>JavaScript untuk interaksi</li>
+                            <li>Responsive untuk mobile</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🛠️ Backend</h4>
+                        <ul style="margin-top: 15px; line-height: 1.8;">
+                            <li>PHP untuk logika server</li>
+                            <li>MySQL untuk database</li>
+                            <li>Session untuk login</li>
+                            <li>Validasi form input</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔒 Keamanan</h4>
+                        <ul style="margin-top: 15px; line-height: 1.8;">
+                            <li>Login dengan username password</li>
+                            <li>Session timeout otomatis</li>
+                            <li>Validasi data input</li>
+                            <li>Hak akses berdasarkan role</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 User Experience</h4>
+                        <ul style="margin-top: 15px; line-height: 1.8;">
+                            <li>Menu navigasi mudah</li>
+                            <li>Form validasi langsung</li>
+                            <li>Notifikasi status clear</li>
+                            <li>Bisa dibuka di HP</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Statistics -->
+            <section class="section">
+                <h2>📊 Project Statistics</h2>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span>User Roles</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span>Database Tables</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span>Core Features</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span>Responsive Design</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Business Impact -->
+            <section class="section">
+                <h2>💼 Business Impact</h2>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">⚡</div>
+                        <div>
+                            <strong>Lebih Cepat</strong><br>
+                            Proses pengajuan lembur jadi lebih mudah
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">👁️</div>
+                        <div>
+                            <strong>Transparan</strong><br>
+                            Status pengajuan bisa dilacak dengan jelas
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">🎯</div>
+                        <div>
+                            <strong>Akurat</strong><br>
+                            Data tersimpan rapi dan tidak hilang
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📋</div>
+                        <div>
+                            <strong>Rapi</strong><br>
+                            Semua data tersusun dan mudah dicari
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">💰</div>
+                        <div>
+                            <strong>Hemat Biaya</strong><br>
+                            Tidak perlu kertas untuk pencatatan
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">📱</div>
+                        <div>
+                            <strong>Fleksibel</strong><br>
+                            Bisa diakses dari HP atau komputer
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+                <!-- Future Enhancements -->
+            <section class="section">
+                <h2>🚀 Future Enhancements</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>📧 Notifikasi Email</h4>
+                        <p>Kirim email otomatis saat ada pengajuan lembur baru</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📱 Aplikasi Mobile</h4>
+                        <p>Buat aplikasi khusus Android/iOS untuk akses lebih mudah</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤖 Analisis Otomatis</h4>
+                        <p>Laporan analisis pola lembur karyawan secara otomatis</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔗 Integrasi Sistem</h4>
+                        <p>Hubungkan dengan sistem gaji dan absensi</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="footer">
+           <h3>🎯 Project Conclusion</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin: 20px 0;">
+                Aplikasi manajemen lembur ini membantu perusahaan mengatur data lembur karyawan dengan lebih mudah dan teratur. 
+                Dengan fitur yang sederhana tapi lengkap, sistem ini cocok untuk perusahaan menengah yang ingin digitalisasi 
+                proses pencatatan lembur.
+            </p>
+            
+            <div style="margin: 30px 0;">
+                <a href="https://github.com/yourusername/overtime-system" class="btn">👁️ View Source Code</a>
+                <a href="https://your-demo-link.com" class="btn">🚀 Live Demo</a>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 30px; margin-top: 30px;">
+                <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript, PHP, MySQL</p>
+                <p><strong>Development Period:</strong> 2025</p>
+                <p><strong>Client:</strong> PT. Sertco Quality</p>
+                <p><strong>Developer:</strong> Janna Tazara</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling untuk internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer untuk animasi scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe semua section
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Counter animation untuk statistics
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : element.textContent.includes('+') ? '+' : '');
+            }, 20);
+        }
+
+        // Trigger counter animation saat statistics section terlihat
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const target = parseInt(stat.textContent);
+                        animateCounter(stat, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats-container');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
